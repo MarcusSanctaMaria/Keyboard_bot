@@ -12,16 +12,19 @@ from random import randint
 
 
 #list of random names
-names = ["Mark", "Pheobe", "Ochre", "Jill", "Johnson", "Vector", "Kiara", "Louis", "Jodi", "Lily"]
+names = ["Mark", "Pheobe", "Ochre", "Jill", "Johnson", 
+         "Vector", "Kiara", "Louis", "Jodi", "Lily"]
 
 #Customer detail dictionary 
 customer_details = {}
 
 
 #lists of keyboards
+keyboard_names = ['Blue Switch', 'Red Switch', 'Brown Switch', 'Clear Switch', 
+                  'Black Switch', 'Green Switch', 'White Switch']
 
 #lists of keyboard prices
-
+keyboard_prices = [79.99, 74.99, 74.99, 84.99, 89.99, 79.99, 84.99]
 
 #list to store ordered keyboards
 
@@ -47,10 +50,10 @@ def val_int(LOW, HIGH, question):
             if num >= 1 and num <= 2:
                 return num
             else: 
-                print("Please enter a number between", LOW, "and" , HIGH)
+                print("Please enter a number between", LOW, "and " , HIGH )
         except ValueError:
             print ("That is not a valid number.")
-            print ("Please enter a number between", LOW, "and" , HIGH)
+            print ("Please enter a number between", LOW, "and " , HIGH )
 
 
 
@@ -76,7 +79,7 @@ def order_type():
     del_pick = ""
     LOW = 1
     HIGH = 2
-    question = (f"Enter a number between, {LOW} and {HIGH}")
+    question = (f"Enter a number between, {LOW} and {HIGH} ")
     print ("Is your order for pickup or delivery?")
     print (" For pickup enter 1.")
     print (" For delivery enter 2.")
@@ -132,7 +135,11 @@ def delivery_info():
  
 
 # Keyboard menu
+def menu():
+    number_keyboard = 7
 
+    for count in range (number_keyboard):
+        print("{} {} ${:.2f}" .format(count+1,keyboard_names[count],keyboard_prices[count]))
 
 
 
@@ -167,7 +174,7 @@ def main():
 
     """
     welcome()
-    del_pick = order_type()
-
+    order_type()
+    menu()
 
 main()
