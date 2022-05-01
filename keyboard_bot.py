@@ -1,26 +1,20 @@
-#Keyboard bot program
-#Bugs - phone number input allows letters
-#     - Name input allows numbers
-#Known bugs
-# Final printout is not printing customer details correctly
-#
-
 import sys
 import random
 from random import randint
 
-
-
 # List of random names
-names = ["Mark", "Pheobe", "Ochre", "Jill", "Johnson", 
+names = ["Mark", "Pheobe", "Ochre", "Jill", "Johnson",
          "Vector", "Kiara", "Louis", "Jodi", "Lily"]
 
 # List of keyboards
-keyboard_names = ['Blue Switch', 'Red Switch', 'Brown Switch', 'Clear Switch', 'Black Switch', 'Green Switch', 
-                    'White Switch', 'Silver Switch', 'Grey Switch', 'Navy Switch', 'Jade Switch', 'Gold Switch']
+keyboard_names = ['Blue Switch', 'Red Switch', 'Brown Switch',
+                  'Clear Switch', 'Black Switch', 'Green Switch',
+                  'White Switch', 'Silver Switch', 'Grey Switch',
+                  'Navy Switch', 'Jade Switch', 'Gold Switch']
 
-#lists of keyboard prices
-keyboard_prices = [79.99, 74.99, 74.99, 84.99, 89.99, 79.99, 84.99, 79.99, 84.99, 89.99, 89.99, 89.99]
+# Lists of keyboard prices
+keyboard_prices = [79.99, 74.99, 74.99, 84.99, 89.99, 79.99,
+                   84.99, 79.99, 84.99, 89.99, 89.99, 89.99]
 
 # List to store ordered keyboards
 order_list = []
@@ -28,54 +22,50 @@ order_list = []
 # List to store keyboard prices
 order_cost = []
 
-#Customer detail dictionary 
+# Customer detail dictionary
 customer_details = {}
 
-#Validtes inputs to check if they are blank
+# Validtes inputs to check if they are blank
 def not_blank(question):
     valid = False
-    while not valid: 
-        response = input (question)
+    while not valid:
+        response = input(question)
         if response != "":
-            return response.title() 
+            return response.title()
         else:
             print ("This cannot be blank")
 
-#Validtes inputs to check if they are an integer.
-def val_int(LOW, HIGH, question):
+# Validtes inputs to check if they are an integer.
+def val_int(low, high, question):
     while True:
         try:
             num = int(input(question))
-            if num >= 1 and num <= 2:
+            if num >= low and num <= high:
                 return num
-            else: 
-                print("Please enter a number between", LOW, "and " , HIGH )
+            else:
+                print (f"Please enter a number between {low} and {high}")
         except ValueError:
-            print ("That is not a valid number.")
-            print ("Please enter a number between", LOW, "and " , HIGH )
-
-
-
-
+            print ("That is not a valid number")
+            print (f"Please enter a number between {low} and {high}")
 
 # Welcome message with random name
 def welcome():
     """
-Purpose: To generate a random name from the list and print out a welcome message 
-Parameters: None 
+Purpose: To generate a random name from the list and print
+         out a welcome message
+Parameters: None
 Returns: None
 
     """
-    
-    
-    num = randint(0,9)
+
+    num = randint(0, 9)
     name = (names[num])
     print("** Welcome to Karlos' Kool Keyboards **")
-    print("** My name is", name ,"**")
+    print("** My name is", name, "**")
     print("** I will be here to help you order your new Kool Keyboard **")
 
 
-# Menu for pickup or delivery 
+# Menu for pickup or delivery
 def order_type():
     del_pick = ""
     LOW = 1
@@ -89,7 +79,6 @@ def order_type():
         print ("Pickup")
         del_pick = "pickup"
         pickup_info()
-        
 
     else:
         print ("Delivery")
@@ -99,15 +88,15 @@ def order_type():
 
 
 
-# Pick up information - name and phone number
+# Pick up information-name and phone number
 def pickup_info():
     question = ("Please enter your name ")
-    customer_details['name'] = not_blank(question )
-    #print (customer_details ['name'])
+    customer_details['name'] = not_blank(question)
+    print (customer_details['name'])
 
     question = ("Please enter your phone number ")
-    customer_details["phone"] = not_blank(question )
-    #print (customer_details ['phone'])
+    customer_details["phone"] = not_blank(question)
+    print (customer_details['phone'])
     print(customer_details)
 
 
@@ -115,37 +104,35 @@ def pickup_info():
 
 def delivery_info():
     question = ("Please enter your name ")
-    customer_details['name'] = not_blank(question )
-    print (customer_details ['name'])
+    customer_details['name'] = not_blank(question)
+    print (customer_details['name'])
 
     question = ("Please enter your phone number ")
-    customer_details["phone"] = not_blank(question )
-    print (customer_details ['phone'])
+    customer_details["phone"] = not_blank(question)
+    print (customer_details['phone'])
 
     question = ("Please enter your house number ")
-    customer_details["house"] = not_blank(question )
-    print (customer_details ['house'])
+    customer_details["house"] = not_blank(question)
+    print (customer_details['house'])
 
     question = ("Please enter your street name ")
-    customer_details["street"] = not_blank(question )
-    print (customer_details ['street'])
+    customer_details["street"] = not_blank(question)
+    print (customer_details['street'])
 
     question = ("Please enter your suburb ")
-    customer_details["suburb"] = not_blank(question )
-    print (customer_details ['suburb'])
- 
+    customer_details["suburb"] = not_blank(question)
+    print (customer_details['suburb'])
 
 # Keyboard menu
 def menu():
     number_keyboard = 12
 
-    for count in range (number_keyboard):
-        print("{} {} ${:.2f}" .format(count+1,keyboard_names[count],keyboard_prices[count]))
+    for count in range(number_keyboard):
+        print("{} {} ${:.2f}" .format(count+1, keyboard_names[count],
+                                      keyboard_prices[count]))
 
-
-
-# Choose total number of keyboards - max 5 
-# Keyboard ordering - from menu - print each keyboard ordered with cost 
+# Choose total number of keyboards-max 5
+# Keyboard ordering-from menu-print each keyboard ordered with cost
 def order_keyboard():
     # Ask for total number of keyboards for order
     num_keyboards = 0
@@ -153,42 +140,50 @@ def order_keyboard():
     HIGH = 5
     MENU_LOW = 1
     MENU_HIGH = 12
-    question = (f"Enter a number between, {LOW} and {HIGH} ")
-    print("How many keyboards do you want to order? "))
+    question = (f"Enter a number between {LOW} and {HIGH} ")
+    print("How many keyboards do you want to order? ")
     num_keyboards = val_int(LOW, HIGH, question)
-
-
     # Choose keyboard from menu
     for item in range(num_keyboards):
         while num_keyboards > 0:
-            print("Please choose your keyboards by entering the number from the menu. ")
-            question = (f"Enter a number between, {MENU_LOW} and {MENU_HIGH} ")
+            print("Please choose the keyboard you would like to"
+                  " order by entering the corresponding number on the menu")
+            question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
             keyboard_ordered = val_int(MENU_LOW, MENU_HIGH, question)
-            keyboard_ordered = keyboard_ordered-1
+            keyboard_ordered = keyboard_ordered - 1
             order_list.append(keyboard_names[keyboard_ordered])
             order_cost.append(keyboard_prices[keyboard_ordered])
-            print("{} ${:.2f}" .format(keyboard_names[keyboard_ordered],keyboard_prices[keyboard_ordered]))
-            num_keyboards = num_keyboards-1
+            print("{} ${:.2f}" .format(keyboard_names[keyboard_ordered],
+                  keyboard_prices[keyboard_ordered]))
+            num_keyboards = num_keyboards - 1
 
 
-# Print order out - including if order is delivering or pick up and names and price of each keyboard - total cost including any delivery charge 
+
+# Print order out-including if order is delivering or pick up and names
+# and price of each keyboard-total cost including any delivery charge
 def print_order(del_pick):
     total_cost = sum(order_cost)
     print("Your Details:")
     if del_pick == "pickup":
         print("Your order is for Pickup.")
-        print(f"Customer Name: {customer_details['name']} \nCustomer Phone Number: {customer_details['phone']}")
-        print ("Thank you for shopping with Karlos' Kool Keyboards. We will send you a text on when your new keyboard is ready to be picked up.")
+        print(f"Customer Name: {customer_details['name']}"
+              "\nCustomer Phone Number: {customer_details['phone']}")
+        print ("Thank you for shopping with Karlos' Kool Keyboards."
+               "We will send you a text on when your new"
+               "keyboard is ready to be picked up.")
     elif del_pick == "delivery":
-        print("Your order is for Delivery. A $9.00 delivery will be applied.")
         total_cost = total_cost + 9
-        print(f"Customer Name: {customer_details['name']} \nCustomer Phone Number: {customer_details['phone']} \nCustomer Address: {customer_details['house'] } {customer_details['street']} {customer_details['suburb']} ")
+        print(f"Customer Name: {customer_details['name']}"
+              "\nCustomer Phone Number: {customer_details['phone']}"
+              "\nCustomer Address: {customer_details['house'] }"
+              "{customer_details['street']} {customer_details['suburb']} ")
     print()
     print("Your Order Details:")
     count = 0
     for item in order_list:
         print("Ordered: {} Cost: ${:.2f}" .format(item, order_cost[count]))
         count = count+1
+    print("Your order is for Delivery. A $9.00 delivery will be applied.")
     print()
     print("Total Order Cost:")
     print(f"${total_cost:.2f}")
@@ -209,7 +204,7 @@ def confirm_cancel():
         print("Order Confirmed.")
         print("Your order has been sent to our company")
         print("Your brand new keyboard will be with you shortly.")
-        new_exit
+        new_exit()
 
     elif confirm == 2:
         print("Your Order has been Cancelled.")
