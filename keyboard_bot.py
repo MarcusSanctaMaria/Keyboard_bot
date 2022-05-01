@@ -16,11 +16,11 @@ names = ["Mark", "Pheobe", "Ochre", "Jill", "Johnson",
          "Vector", "Kiara", "Louis", "Jodi", "Lily"]
 
 # List of keyboards
-keyboard_names = ['Blue Switch', 'Red Switch', 'Brown Switch', 'Clear Switch', 
-                  'Black Switch', 'Green Switch', 'White Switch']
+keyboard_names = ['Blue Switch', 'Red Switch', 'Brown Switch', 'Clear Switch', 'Black Switch', 'Green Switch', 
+                    'White Switch', 'Silver Switch', 'Grey Switch', 'Navy Switch', 'Jade Switch', 'Gold Switch']
 
 #lists of keyboard prices
-keyboard_prices = [79.99, 74.99, 74.99, 84.99, 89.99, 79.99, 84.99]
+keyboard_prices = [79.99, 74.99, 74.99, 84.99, 89.99, 79.99, 84.99, 79.99, 84.99, 89.99, 89.99, 89.99]
 
 # List to store ordered keyboards
 order_list = []
@@ -137,15 +137,15 @@ def delivery_info():
 
 # Keyboard menu
 def menu():
-    number_keyboard = 7
+    number_keyboard = 12
 
     for count in range (number_keyboard):
         print("{} {} ${:.2f}" .format(count+1,keyboard_names[count],keyboard_prices[count]))
 
 
 
-# Choose total number of Pizzas - max 5 
-# Keyboard ordering - from menu - print each pizza ordered with cost 
+# Choose total number of keyboards - max 5 
+# Keyboard ordering - from menu - print each keyboard ordered with cost 
 def order_keyboard():
     # Ask for total number of keyboards for order
     num_keyboards = 0
@@ -167,13 +167,13 @@ def order_keyboard():
             while True:
                 try:
                     keyboard_ordered = int(input("Please choose your keyboards by entering the number from the menu. "))
-                    if keyboard_ordered >= 1 and keyboard_ordered <= 7:
+                    if keyboard_ordered >= 1 and keyboard_ordered <= 12:
                         break
                     else:
-                        print("Your keyboard order must be between 1 and 7 keyboards.")
+                        print("Your keyboard order must be between 1 and 12 keyboards.")
                 except ValueError:
                     print("That is not a valid number.")
-                    print("Please choose a number between 1 and 7.")
+                    print("Please choose a number between 1 and 12.")
             keyboard_ordered = keyboard_ordered-1
             order_list.append(keyboard_names[keyboard_ordered])
             order_cost.append(keyboard_prices[keyboard_ordered])
@@ -181,13 +181,14 @@ def order_keyboard():
             num_keyboards = num_keyboards-1
 
 
-# Print order out - including if order is delivering or pick up and names and price of each pizza - total cost including any delivery charge 
+# Print order out - including if order is delivering or pick up and names and price of each keyboard - total cost including any delivery charge 
 def print_order(del_pick):
     total_cost = sum(order_cost)
     print("Your Details:")
     if del_pick == "pickup":
         print("Your order is for Pickup.")
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone Number: {customer_details['phone']}")
+        print ("Thank you for shopping with Karlos' Kool Keyboards. We will send you a text on when your new keyboard is ready to be picked up.")
     elif del_pick == "delivery":
         print("Your order is for Delivery. A $9.00 delivery will be applied.")
         total_cost = total_cost + 9
@@ -201,6 +202,7 @@ def print_order(del_pick):
     print()
     print("Total Order Cost:")
     print(f"${total_cost:.2f}")
+    print("Thank you for shopping with Karlos' Kool Keyboards! The keyboard will be sent to you soon.")
 
 
 # Ability to cancel or proceed with order
