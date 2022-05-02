@@ -4,7 +4,8 @@ from random import randint
 # Constants
 LOW = 1  # LOW equals 1
 HIGH = 2  # HIGH equals 2
-
+PH_LOW = 7
+PH_HIGH = 10
 # List of random names
 names = ["Mark", "Pheobe", "Ochre", "Jill", "Johnson",
          "Vector", "Kiara", "Louis", "Jodi", "Lily"]
@@ -59,6 +60,22 @@ def val_int(low, high, question):
             print ("That is not a valid number")
             print (f"Please enter a number between {low} and {high}")
 
+def check_phone(question, PH_LOW, PH_HIGH):
+    while True:
+        try:
+            num = int(input(question))
+            test_num = num
+            count = 0
+            while test_num > 0:
+                test_num = test_num//10
+                count = count + 1
+            if count >= PH_LOW and count <= PH_HIGH:
+                return str(num)
+            else:
+                print("NZ Phone numbers must have between 7 and 10 digits.")
+        except ValueError:
+            print("Please enter a number.")
+
 # Welcome message with random name
 def welcome():
     """
@@ -76,35 +93,35 @@ Returns: None
     print("** I will be here to help you order your new Kool Keyboard **")
 
 
-# Menu for pickup or delivery
+# Menu for Click and Collect or delivery
 def order_type():
-    del_pick = ""
+    del_click = ""
     question = (f"Enter a number between, {LOW} and {HIGH} ")
-    print ("Is your order for pickup or delivery?")
-    print (" For pickup enter 1.")
+    print ("Is your order for Click and Collect or delivery?")
+    print (" For Click and Collect enter 1.")
     print (" For delivery enter 2.")
     delivery = val_int(LOW, HIGH, question)
     if delivery == 1:
-        print ("Pickup")
-        del_pick = "pickup"
-        pickup_info()
+        print ("Click and Collect")
+        del_click = "Click and Collect"
+        clickcollect_info()
 
     else:
         print ("Delivery")
         delivery_info()
-        del_pick = "delivery"
-    return del_pick
+        del_click = "delivery"
+    return del_click
 
 
 
-# Pick up information-name and phone number
-def pickup_info():
+# Click and collect  information-name and phone number
+def clickcollect_info():
     question = ("Please enter your name ")
     customer_details['name'] = check_string(question)
     print (customer_details['name'])
 
     question = ("Please enter your phone number ")
-    customer_details["phone"] = not_blank(question)
+    customer_details["phone"] = check_phone(question, PH_LOW, PH_HIGH)
     print (customer_details['phone'])
     print(customer_details)
 
@@ -117,7 +134,7 @@ def delivery_info():
     print (customer_details['name'])
 
     question = ("Please enter your phone number ")
-    customer_details["phone"] = not_blank(question)
+    customer_details["phone"] = check_phone(question, PH_LOW, PH_HIGH)
     print (customer_details['phone'])
 
     question = ("Please enter your house number ")
@@ -168,19 +185,19 @@ def order_keyboard():
 
 
 
-# Print order out-including if order is delivering or pick up and names
+# Print order out-including if order is delivering or Click and Collect and names
 # and price of each keyboard-total cost including any delivery charge
-def print_order(del_pick):
+def print_order(del_click):
     total_cost = sum(order_cost)
     print("Your Details:")
-    if del_pick == "pickup":
-        print("Your order is for Pickup.")
+    if del_click == "Click and Collect":
+        print("Your order is for Click and Collect.")
         print(f"Customer Name: {customer_details['name']}"
               "\nCustomer Phone Number: {customer_details['phone']}")
         print ("Thank you for shopping with Karlos' Kool Keyboards."
                "We will send you a text on when your new"
-               "keyboard is ready to be picked up.")
-    elif del_pick == "delivery":
+               "keyboard is ready to be collected.")
+    elif del_click == "delivery":
         total_cost = total_cost + 9
         print(f"Customer Name: {customer_details['name']}"
               "\nCustomer Phone Number: {customer_details['phone']}"
@@ -196,7 +213,7 @@ def print_order(del_pick):
     print()
     print("Total Order Cost:")
     print(f"${total_cost:.2f}")
-    print("Thank you for shopping with Karlos' Kool Keyboards! The keyboard will be sent to you soon.")
+    print("Thank you for shopping with Karlos' Kool Keyboards! The keyboard will be with you soon.")
 
 
 # Ability to cancel or proceed with order
@@ -241,8 +258,6 @@ def new_exit():
         sys.exit()
 
 
-
-
 # Main function 
 def main():
     
@@ -253,10 +268,10 @@ def main():
 
     """
     welcome()
-    del_pick = order_type()
+    del_click = order_type()
     menu()
     order_keyboard()
-    print_order(del_pick)
+    print_order(del_click)
     confirm_cancel()
 
 main()
