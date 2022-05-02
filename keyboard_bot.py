@@ -1,12 +1,15 @@
 import sys
 import random
 from random import randint
+# Constants
+LOW = 1  # LOW equals 1
+HIGH = 2  # HIGH equals 2
 
 # List of random names
 names = ["Mark", "Pheobe", "Ochre", "Jill", "Johnson",
          "Vector", "Kiara", "Louis", "Jodi", "Lily"]
 
-# List of keyboards
+# List of keyboard switches to choose from
 keyboard_names = ['Blue Switch', 'Red Switch', 'Brown Switch',
                   'Clear Switch', 'Black Switch', 'Green Switch',
                   'White Switch', 'Silver Switch', 'Grey Switch',
@@ -25,16 +28,24 @@ order_cost = []
 # Customer detail dictionary
 customer_details = {}
 
-# Validtes inputs to check if they are blank
-def not_blank(question):
-    valid = False
+# A function that validtes inputs to check if they are blank
+def not_blank(question): # Defines the function with the name not_blank
+    valid = False 
     while not valid:
         response = input(question)
-        if response != "":
+        if response != "":  # Checks if the input is blank
             return response.title()
         else:
-            print ("This cannot be blank")
+            print ("This cannot be blank")  
 
+def check_string(question):
+    while True:
+        response = input(question)
+        x = response.isalpha()
+        if x == False:
+            print("Input must only contain letters.")
+        else: 
+            return response.title()
 # Validtes inputs to check if they are an integer.
 def val_int(low, high, question):
     while True:
@@ -68,8 +79,6 @@ Returns: None
 # Menu for pickup or delivery
 def order_type():
     del_pick = ""
-    LOW = 1
-    HIGH = 2
     question = (f"Enter a number between, {LOW} and {HIGH} ")
     print ("Is your order for pickup or delivery?")
     print (" For pickup enter 1.")
@@ -91,7 +100,7 @@ def order_type():
 # Pick up information-name and phone number
 def pickup_info():
     question = ("Please enter your name ")
-    customer_details['name'] = not_blank(question)
+    customer_details['name'] = check_string(question)
     print (customer_details['name'])
 
     question = ("Please enter your phone number ")
@@ -104,7 +113,7 @@ def pickup_info():
 
 def delivery_info():
     question = ("Please enter your name ")
-    customer_details['name'] = not_blank(question)
+    customer_details['name'] = check_string(question)
     print (customer_details['name'])
 
     question = ("Please enter your phone number ")
@@ -116,11 +125,11 @@ def delivery_info():
     print (customer_details['house'])
 
     question = ("Please enter your street name ")
-    customer_details["street"] = not_blank(question)
+    customer_details["street"] = check_string(question)
     print (customer_details['street'])
 
     question = ("Please enter your suburb ")
-    customer_details["suburb"] = not_blank(question)
+    customer_details["suburb"] = check_string(question)
     print (customer_details['suburb'])
 
 # Keyboard menu
@@ -136,13 +145,13 @@ def menu():
 def order_keyboard():
     # Ask for total number of keyboards for order
     num_keyboards = 0
-    LOW = 1
-    HIGH = 5
+    NUM_LOW = 1
+    NUM_HIGH = 5
     MENU_LOW = 1
     MENU_HIGH = 12
-    question = (f"Enter a number between {LOW} and {HIGH} ")
+    question = (f"Enter a number between {NUM_LOW} and {NUM_HIGH} ")
     print("How many keyboards do you want to order? ")
-    num_keyboards = val_int(LOW, HIGH, question)
+    num_keyboards = val_int(NUM_LOW, NUM_HIGH, question)
     # Choose keyboard from menu
     for item in range(num_keyboards):
         while num_keyboards > 0:
@@ -192,8 +201,6 @@ def print_order(del_pick):
 
 # Ability to cancel or proceed with order
 def confirm_cancel():
-    LOW = 1
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print("Please confrim your order.")
     print("For confirm please enter 1")
@@ -213,8 +220,6 @@ def confirm_cancel():
 
 # Option for new order or to exit 
 def new_exit():
-    LOW = 1
-    HIGH = 2
     question = (f"Enter a number between {LOW} and {HIGH} ")
     print("Do you want to start another order or exit?")
     print("To start another order, please enter 1")
