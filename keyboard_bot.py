@@ -29,191 +29,233 @@ order_cost = []
 # Customer detail dictionary
 customer_details = {}
 
-# A function that validtes inputs to check if they are blank
-def not_blank(question): # Defines the function with the name not_blank
-    valid = False 
-    while not valid:
-        response = input(question)
-        if response != "":  # Checks if the input is blank
-            return response.title()
-        else:
-            print ("This cannot be blank")  
+# Validates input so it is not blank
+# Takes question as the parameter inside the bracket
+# Returns the response in title class if input is valid
+def not_blank(question): # Defines the code as a not_blank function with question as parameter
+    """
+    Purpose: To make sure that the input is not left blank
+    Parameters: None
+    Returns: None
+    """
+    valid = False # Makes it so valid can be used for false
+    while not valid: # While not false
+        response = input(question) # Asks for user input using a string
+        if response != "":  # Checks if the input is not blank, hense !=
+            return response.title() # Returns the response in title class
+        else: # Triggers if the input is blank
+            print ("This cannot be blank")  # Prints the error message
 
-def check_string(question):
-    while True:
-        response = input(question)
-        x = response.isalpha()
-        if x == False:
-            print("Input must only contain letters.")
-        else: 
-            return response.title()
-# Validtes inputs to check if they are an integer.
-def val_int(low, high, question):
-    while True:
-        try:
-            num = int(input(question))
-            if num >= low and num <= high:
-                return num
-            else:
-                print (f"Please enter a number between {low} and {high}")
-        except ValueError:
-            print ("That is not a valid number")
-            print (f"Please enter a number between {low} and {high}")
+# Validates input as letters
+# Takes question as the parameter inside the bracket
+# Returns the response in title class if input is valid
+def check_string(question): # Defines the code as a check_string function with question as parameter
+    """
+    Purpose: To make sure that the input is set as an alphabetical character
+    Parameters: None
+    Returns: None
+    """
+    while True: # Creates a while loop
+        response = input(question) # Asks for user for string input with question as parameter
+        x = response.isalpha() # Checks that input is a letter by setting x to True
+        if x == False: # If x is false, not a letter, this triggers
+            print("Input must only contain letters.") # Prints error message
+        else: # Triggers if x is True
+            return response.title() # Returns response in title class
 
-def check_phone(question, PH_LOW, PH_HIGH):
-    while True:
-        try:
-            num = int(input(question))
-            test_num = num
-            count = 0
-            while test_num > 0:
-                test_num = test_num//10
-                count = count + 1
-            if count >= PH_LOW and count <= PH_HIGH:
-                return str(num)
-            else:
-                print("NZ Phone numbers must have between 7 and 10 digits.")
-        except ValueError:
-            print("Please enter a number.")
+# Validates input as integers
+# Takes question as parameter
+def val_int(low, high, question): # Defines code as a val_int function with low, high, question as parameter
+    """
+    Purpose: To make sure that the input is set as an integer
+    Parameters: None
+    Returns: None
+    """
+    while True: # Creates a while loop
+        try: # Triggers while the function is true
+            num = int(input(question)) # Creates an integer input for the question (question is a parameter)
+            if num >= low and num <= high: # Triggers if the input is greater to or equal to low (1) and less than or equal to high (2)
+                return num # Returns and accepts input
+            else: # Triggers if input is not within or equal to low and high
+                print (f"Please enter a number between {low} and {high}") # Asks for the input again
+        except ValueError: # Triggers if input is invalid (int() creates an invalid input when it is not an integer)
+            print ("That is not a valid number") # Prints error message
+            print (f"Please enter a number between {low} and {high}") # Asks for the input again
+
+# Validates input as an NZ number
+# Takes question as a parameter
+def check_phone(question, PH_LOW, PH_HIGH): # Defines code as a check_phone function with question, PH_LOW, PH_HIGH as parameter
+    """
+    Purpose: To make sure that the phone number that is input is an integer and is valid to be an NZ number (between 7 and 10 digits)
+    Parameters: None
+    Returns: None
+    """
+    while True: # Creates a while loop
+        try: # Triggers while the function is true
+            num = int(input(question)) # Creates an integer input for the question (question is a parameter)
+            test_num = num # Makes input equal the test_num variable
+            count = 0 # Creates the variable count and sets it to 0
+            while test_num > 0: # Creates a loop while the test_num variable is 0
+                test_num = test_num//10 # Divides the variable test_num by 10
+                count = count + 1 # Adds 1 to the variable count
+            if count >= PH_LOW and count <= PH_HIGH: # Triggers if the count is greater than PH_LOW and less than or equal to PH_HIGH
+                return str(num) # Returns and accepts input
+            else: # Triggers if input is not above
+                print("NZ Phone numbers must have between 7 and 10 digits.") # Prints error message
+        except ValueError: # Triggers if input is invalid (int() creates an invalid input when it is not an integer)
+            print("Please enter a number.") # Prints error message
 
 # Welcome message with random name
-def welcome():
+def welcome(): # Defines code as a welcome function
     """
-Purpose: To generate a random name from the list and print
-         out a welcome message
-Parameters: None
-Returns: None
-
+    Purpose: To generate a random name from the list and print
+             out a welcome message
+    Parameters: None
+    Returns: None
     """
-
-    num = randint(0, 9)
-    name = (names[num])
-    print("** Welcome to Karlos' Kool Keyboards **")
-    print("** My name is", name, "**")
-    print("** I will be here to help you order your new Kool Keyboard **")
-
-
-# Menu for Click and Collect or delivery
-def order_type():
-    del_click = ""
-    question = (f"Enter a number between, {LOW} and {HIGH} ")
-    print ("Is your order for Click and Collect or delivery?")
-    print (" For Click and Collect enter 1.")
-    print (" For delivery enter 2.")
-    delivery = val_int(LOW, HIGH, question)
-    if delivery == 1:
-        print ("Click and Collect")
-        del_click = "Click and Collect"
-        clickcollect_info()
-
-    else:
-        print ("Delivery")
-        delivery_info()
-        del_click = "delivery"
-    return del_click
+    num = randint(0, 9) # Chooses a random number between or equal to 0 and 9
+    name = (names[num]) # Name will be chosen from list with the corresponding number taken from the randint above
+    print("** Welcome to Karlos' Kool Keyboards **") # Prints a welcome message with asterisks
+    print("** My name is", name, "**") # Continues welcome message using the random name chosen above
+    print("** I will be here to help you order your new Kool Keyboard **") # Finishes welcome message
 
 
+# Order type function. User chooses between Click & Collect and Delivery
+def order_type(): # Defines the code as an order_type function
+    '''
+    Purpose: To create a menu for the user to choose between Click and Collect and Delivery
+    Parameter: none
+    Return: Returns if del_click is valid
+    '''
+    del_click = "" # Sets the variable del_click as blank
+    question = (f"Enter a number between, {LOW} and {HIGH} ") # Sets the question variable to ask users to choose between the LOW (1) and HIGH (2)
+    print ("Is your order for Click and Collect or delivery?") # Prints message
+    print (" For Click and Collect enter 1.") # Prints message to indicate that Click and Collect is 1
+    print (" For Delivery enter 2.") # Prints message to indicate that Delivery is 2
+    delivery = val_int(LOW, HIGH, question) # Sets delivery to use the val_int fucntion to make sure that the user can only enter integers.  Uses LOW, HIGH and question as parameters
+    if delivery == 1: # Triggers if the input is 1
+        print ("Click and Collect") # Prints Click and Collect to let the user know they chose Click and Collect
+        del_click = "Click and Collect" # Sets del_click as Click and Collect
+        clickcollect_info() # Selects the clickcollect_info function
+    elif delivery == 2: # Triggers if input is 2 
+        print ("Delivery") # Prints Delivery to let the user know they chose Delivery
+        delivery_info() # Selects the delivery_info function
+        del_click = "delivery" # Sets del_click as delivery
+    return del_click # Returns and accepts input
 
-# Click and collect  information-name and phone number
-def clickcollect_info():
-    question = ("Please enter your name ")
-    customer_details['name'] = check_string(question)
-    print (customer_details['name'])
-
-    question = ("Please enter your phone number ")
-    customer_details["phone"] = check_phone(question, PH_LOW, PH_HIGH)
-    print (customer_details['phone'])
-    print(customer_details)
 
 
-# Delivery information  - name, address and phone number
+# Click and collect information - name and phone number
+def clickcollect_info(): # Defines the code as a clickcollect_info function
+    """
+    Purpose: To collect the users information when the user chooses Click and Collect
+    Parameters: None
+    Returns: None
+    """
+    question = ("Please enter your name ") # Sets question to ask the user for their name
+    customer_details['name'] = check_string(question) # Takes input from above and adds input to customer_details list as name. Then it validates inputs as letters
+    print (customer_details['name']) # Prints out the customer's name
 
-def delivery_info():
-    question = ("Please enter your name ")
-    customer_details['name'] = check_string(question)
-    print (customer_details['name'])
+    question = ("Please enter your phone number ") # Sets question to ask the user for their phone number
+    customer_details["phone"] = check_phone(question, PH_LOW, PH_HIGH)  # Takes input from above and adds input to customer_details list as phone. Then it validates input as a valid NZ number.  Uses question, PH_LOW and PH_HIGH as parameters
+    print (customer_details['phone']) # Prints out customer's phone number
 
-    question = ("Please enter your phone number ")
-    customer_details["phone"] = check_phone(question, PH_LOW, PH_HIGH)
-    print (customer_details['phone'])
+# Delivery information - name, phone number and address
+def delivery_info(): # Defines the code as a delivery_info function
+    """
+    Purpose: To collect the users information when the user chooses Delivery
+    Parameters: None
+    Returns: None
+    """
+    question = ("Please enter your name ") # Sets question to ask the user for their name
+    customer_details['name'] = check_string(question) # Takes input from above and adds input to customer_details list as name. Then it validates inputs as letters
+    print (customer_details['name']) # Prints out the customer's name
 
-    question = ("Please enter your house number ")
-    customer_details["house"] = not_blank(question)
-    print (customer_details['house'])
+    question = ("Please enter your phone number ") # Sets question to ask the user for their phone number
+    customer_details["phone"] = check_phone(question, PH_LOW, PH_HIGH)  # Takes input from above and adds input to customer_details list as phone. Then it validates input as a valid NZ number
+    print (customer_details['phone']) # Prints out customer's phone number
 
-    question = ("Please enter your street name ")
-    customer_details["street"] = check_string(question)
-    print (customer_details['street'])
+    question = ("Please enter your house number ") # Sets question to ask the user for their house number
+    customer_details["house"] = not_blank(question) # Takes input from above and adds input to customer_details list as house. Then it validates input as not blank
+    print (customer_details['house']) # Prints out customer's house number
 
-    question = ("Please enter your suburb ")
-    customer_details["suburb"] = check_string(question)
-    print (customer_details['suburb'])
+    question = ("Please enter your street name ") # Sets question to ask the user for their street name
+    customer_details["street"] = check_string(question) # Takes input from above and adds input to customer_details list as street. Then it validates inputs as letters
+    print (customer_details['street']) # Prints out customer's street name
+
+    question = ("Please enter your suburb ") # Sets question to ask the user for their suburb
+    customer_details["suburb"] = check_string(question) # Takes input from above and adds input to customer_details list as suburb. Then it validates inputs as letters
+    print (customer_details['suburb']) # Prints out customer's suburb
 
 # Keyboard menu
-def menu():
-    number_keyboard = 12
-
-    for count in range(number_keyboard):
-        print("{} {} ${:.2f}" .format(count+1, keyboard_names[count],
+def menu(): # Defines the code as a menu function
+    """
+    Purpose: To print out the keyboard menu
+    Parameters: None
+    Returns: None
+    """
+    number_keyboard = 12 # Sets number_keyboard variable to 12 because there are 12 items on the menu
+    for count in range(number_keyboard): # For items within the range of 1 and 12
+        print("{} {} ${:.2f}" .format(count+1, keyboard_names[count], # Prints out each item in the keyboard_names list with prices from keyboard_prices list. Each item is formatted
                                       keyboard_prices[count]))
 
-# Choose total number of keyboards-max 5
-# Keyboard ordering-from menu-print each keyboard ordered with cost
-def order_keyboard():
+# Keyboard ordering
+def order_keyboard(): # Defines code as an order_keyboard function
+    """
+    Purpose: To ask the user how many keyboards they want to order with a maximum of 5
+    Parameters: None
+    Returns: None
+    """
     # Ask for total number of keyboards for order
-    num_keyboards = 0
-    NUM_LOW = 1
-    NUM_HIGH = 5
-    MENU_LOW = 1
-    MENU_HIGH = 12
-    question = (f"Enter a number between {NUM_LOW} and {NUM_HIGH} ")
-    print("How many keyboards do you want to order? ")
-    num_keyboards = val_int(NUM_LOW, NUM_HIGH, question)
+    num_keyboards = 0 # Sets num_keyboards (number of keyboards to be ordered) variable to 0
+    NUM_LOW = 1 # Sets constant as 1
+    NUM_HIGH = 5 # Sets constant as 5
+    MENU_LOW = 1 # Sets constant as 1
+    MENU_HIGH = 12 # Sets constant as 12
+    question = (f"Please enter a number between {NUM_LOW} and {NUM_HIGH} ") # Sets the question variable to ask users to choose between the LOW (1) and HIGH (5)
+    print("How many keyboards do you want to order? You can only order a maxiumum of 5.") # ASks the user how many keyboards they want to order
+    num_keyboards = val_int(NUM_LOW, NUM_HIGH, question) # Sets num_keyboards to use the val_int fucntion to make sure that the user can only enter integers. Uses NUM_LOW, NUM_HIGH and question as parameters
     # Choose keyboard from menu
-    for item in range(num_keyboards):
-        while num_keyboards > 0:
+    for item in range(num_keyboards): # For keyboard(s) between 1 and 12 (num_keyboard corresponding to the number of the keyboard in the menu)
+        while num_keyboards > 0: # Creates while loop that continues while the input (num_keyboards) is greater than 0
             print("Please choose the keyboard you would like to"
-                  " order by entering the corresponding number on the menu")
-            question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
-            keyboard_ordered = val_int(MENU_LOW, MENU_HIGH, question)
-            keyboard_ordered = keyboard_ordered - 1
-            order_list.append(keyboard_names[keyboard_ordered])
-            order_cost.append(keyboard_prices[keyboard_ordered])
+                  " order by entering the corresponding number on the menu.") # Prints the question asking users to choose which keyboard they want to order
+            question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")  # Sets the question variable to ask users to choose between the LOW (1) and HIGH (12)
+            keyboard_ordered = val_int(MENU_LOW, MENU_HIGH, question)  # Sets keyboard_ordered to use the val_int fucntion to make sure that the user can only enter integers. Uses MENU_LOW, MENU_HIGH and question as parameters
+            keyboard_ordered = keyboard_ordered - 1 # Subtracts 1 from the keyboard_ordered variable to go down the list
+            order_list.append(keyboard_names[keyboard_ordered]) # Adds keyboard_names corresponding to the keyboard_ordered number to the order_list
+            order_cost.append(keyboard_prices[keyboard_ordered]) # Adds keyboard_prices corresponding to the keyboard_ordered number to the order_list
             print("{} ${:.2f}" .format(keyboard_names[keyboard_ordered],
-                  keyboard_prices[keyboard_ordered]))
-            num_keyboards = num_keyboards - 1
+                  keyboard_prices[keyboard_ordered])) # Prints out keyboard ordered with price
+            num_keyboards = num_keyboards - 1 # Subtracts 1 from the num_keyboards variable to go down the list
 
-
-
-# Print order out-including if order is delivering or Click and Collect and names
-# and price of each keyboard-total cost including any delivery charge
-def print_order(del_click):
-    total_cost = sum(order_cost)
-    print("Your Details:")
-    if del_click == "Click and Collect":
-        print("Your order is for Click and Collect.")
-        print(f"Customer Name: {customer_details['name']}"
-              "\nCustomer Phone Number: {customer_details['phone']}")
-        print ("Thank you for shopping with Karlos' Kool Keyboards."
-               "We will send you a text on when your new"
-               "keyboard is ready to be collected.")
-    elif del_click == "delivery":
-        total_cost = total_cost + 9
-        print(f"Customer Name: {customer_details['name']}"
-              "\nCustomer Phone Number: {customer_details['phone']}"
-              "\nCustomer Address: {customer_details['house'] }"
-              "{customer_details['street']} {customer_details['suburb']} ")
-    print()
-    print("Your Order Details:")
-    count = 0
-    for item in order_list:
-        print("Ordered: {} Cost: ${:.2f}" .format(item, order_cost[count]))
-        count = count+1
-    print("Your order is for Delivery. A $9.00 delivery will be applied.")
-    print()
-    print("Total Order Cost:")
-    print(f"${total_cost:.2f}")
-    print("Thank you for shopping with Karlos' Kool Keyboards! The keyboard will be with you soon.")
+# Prints out order
+def print_order(del_click): # Defines function as a print_order function
+    """
+    Purpose: To print out the order. The order includes the customer details, order type, name and total order price.
+    Parameters: del_click
+    Returns: None
+    """
+    total_cost = sum(order_cost) # Sets the variable total_cost as the sum of numbers in the order_cost list
+    print("Your Details:") # Prints message
+    if del_click == "Click and Collect": # Triggers if the del_click is set to Click and Collect which was chosen at the beginning of program
+        print("Your order is for Click and Collect.") # Prints message to indicate the order type
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone Number: {customer_details['phone']}")  # Prints out all of the customer's details (name and phone number)
+    elif del_click == "delivery": # Triggers if the del_click is set to Delivery which was chosen at the beginning of program
+        total_cost = total_cost + 9 # Adds the delivery cost of $9 to the total cost
+        print(f"Customer Name: {customer_details['name']} \nCustomer Phone Number: {customer_details['phone']} \nCustomer Address: {customer_details['house'] } {customer_details['street']} {customer_details['suburb']} ")
+        # Prints out all of the customer's details (name, phone number and address)
+        print("Your order is for Delivery. A $9.00 delivery will be applied.")
+    print() # Prints out a blank space
+    print("Your Order Details:") # Prints message
+    count = 0 # Sets the count variable to 0
+    for item in order_list: # Triggers loop for each of the items in the order_list list
+        print("Ordered: {} Cost: ${:.2f}" .format(item, order_cost[count])) # Prints out the keyboard ordered with the cost next to it
+        count = count+1 # Adds 1 to count 
+    print() # Prints an empty line
+    print("Total Order Cost:") # Prints message
+    print(f"${total_cost:.2f}") # Prints total cost with proper formatting
+    print("Thank you for shopping with Karlos' Kool Keyboards! The keyboard will be with you soon.") # Prints message
 
 
 # Ability to cancel or proceed with order
