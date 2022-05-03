@@ -280,27 +280,30 @@ def menu():  # Defines the code as a menu function
 def order_keyboard():  # Defines code as an order_keyboard function
     """
     Purpose: To ask the user how many keyboards
-            they want to order with a maximum of 5
+            they want to order.
     Parameters: None
     Returns: None
     """
     # Ask for total number of keyboards for order
     num_keyboards = 0
     # Sets num_keyboards (number of keyboards to be ordered) variable to 0
-    NUM_LOW = 1  # Sets constant as 1
-    NUM_HIGH = 5  # Sets constant as 5
     MENU_LOW = 1  # Sets constant as 1
     MENU_HIGH = 12  # Sets constant as 12
-    question = (f"Please enter a number between {NUM_LOW} and {NUM_HIGH} ")
-    # Sets the question variable to ask users to choose
-    # between the LOW (1) and HIGH (5)
-    print("How many keyboards do you want to order?"
-          "You can only order a maxiumum of 5.")
-    # Asks the user how many keyboards they want to order
-    num_keyboards = val_int(NUM_LOW, NUM_HIGH, question)
-    # Sets num_keyboards to use the val_int fucntion to
-    # make sure that the user can only enter integers.
-    # Uses NUM_LOW, NUM_HIGH and question as parameters
+
+    while True:  # Sets up while loop
+        try:  # While the function is true
+            num_keyboards = int(input("How many keyboards"
+                                      "do you want to order? "))
+            # Asks the user how many manga they would like to order
+            if num_keyboards >= 1:  # If num_manga is greater or equal to 1
+                break  # Break from loop and accept value
+            else:  # If input is inncorect
+                print("0 is not a valid number")
+                # Prints 0 in not a valid number
+        except ValueError:
+            print("That is not a valid number")
+            # Print this is not a valid number
+            print("Please enter a number")  # Print please enter a number
     # Choose keyboard from menu
     for item in range(num_keyboards):
         # For keyboard(s) between 1 and 12 (num_keyboard corresponding to the
@@ -354,13 +357,18 @@ def print_order(del_click):  # Defines function as a print_order function
         # Prints out all of the customer's details (name and phone number)
     elif del_click == "delivery":
         # Triggers if the del_click is set to Delivery
-        total_cost = total_cost + 9
-        # Adds the delivery cost of $9 to the total cost
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone Number: {customer_details['phone']} \nCustomer Address: {customer_details['house'] } {customer_details['street']} {customer_details['suburb']} ")
+        if len(order_list) >= 5:
+            # If number of keyboards ordered is more than or equal to 5
+            print ("Your order will be delievered for free")
+            # Prints message informing the customer their delivery fee is free
+        elif len(order_list) < 5:
+            # If number of keyboards ordered is less than 5
+            print ("There is an additional $9.00 delivery charge")
+            total_cost = total_cost + 9
+            # Adds the delivery cost of $9 to the total cost
         # Prints out all of the customer's details
         # (name, phone number and address)
-        print("Your order is for Delivery. A $9.00 delivery will be applied.")
-        # Prints message
     print()  # Prints out a blank space
     print("Your Order Details:")  # Prints message
     count = 0  # Sets the count variable to 0
@@ -368,8 +376,8 @@ def print_order(del_click):  # Defines function as a print_order function
         # Triggers loop for each of the items in the order_list list
         print("Ordered: {} Cost: ${:.2f}" .format(item, order_cost[count]))
         # Prints out the keyboard ordered with the cost next to it
-        count = count+1  # Adds 1 to count
-    print()  # Prints an empty line
+        count = count + 1  # Adds 1 to count
+    print()  # Prints out a blank space
     print("Total Order Cost:")  # Prints message
     print(f"${total_cost:.2f}")  # Prints total cost with proper formatting
     if del_click == "Click and Collect":
