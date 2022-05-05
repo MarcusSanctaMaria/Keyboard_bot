@@ -47,6 +47,7 @@ def not_blank(question):  # Defines the code as a not_blank function
             return response.title()  # Returns the response in title class
         else:  # Triggers if the input is blank
             print ("This cannot be blank")   # Prints the error message
+            print()  # Prints out a blank space
 
 
 # Validates input as letters
@@ -66,6 +67,7 @@ def check_string(question):
         # Checks that input is a letter by setting x to True
         if x == False:  # If x is false, not a letter, this triggers
             print("Input must only contain letters.")  # Prints error message
+            print()  # Prints out a blank space
         else:  # Triggers if x is True
             return response.title()  # Returns response in title class
 
@@ -90,12 +92,14 @@ def val_int(low, high, question):
             else:  # Triggers if input is not within or equal to low and high
                 print (f"Please enter a number between {low} and {high}")
                 # Asks for the input again
+                print()  # Prints out a blank space
         except ValueError:
             # Triggers if input is invalid (int() creates an invalid input
             # when it is not an integer)
             print ("That is not a valid number")  # Prints error message
             print (f"Please enter a number between {low} and {high}")
             # Asks for the input again
+            print()  # Prints out a blank space
 
 
 # Validates input as an NZ number
@@ -127,10 +131,12 @@ def check_phone(question, PH_LOW, PH_HIGH):
             else:  # Triggers if input is not above
                 print("NZ Phone numbers must have between 7 and 10 digits.")
                 # Prints error message
+                print()  # Prints out a blank space
         except ValueError:
             # Triggers if input is invalid (int() creates a
             # invalid input when it is not an integer)
             print("Please enter a number.")  # Prints error message
+            print()  # Prints out a blank space
 
 
 # Welcome message with random name
@@ -151,6 +157,7 @@ def welcome():  # Defines code as a welcome function
     # Continues welcome message using the random name chosen above
     print("** I will be here to help you order your new Kool Keyboard **")
     # Finishes welcome message
+    print()  # Prints out a blank space
 
 
 # Order type function. User chooses between Click & Collect and Delivery
@@ -170,6 +177,7 @@ def order_type():  # Defines the code as an order_type function
     print (" For Click and Collect enter 1.")
     # Prints message to indicate that Click and Collect is 1
     print (" For Delivery enter 2.")
+    print()  # Prints out a blank space
     # Prints message to indicate that Delivery is 2
     delivery = val_int(LOW, HIGH, question)
     # Sets delivery to use the val_int fucntion to make sure that
@@ -185,6 +193,7 @@ def order_type():  # Defines the code as an order_type function
         # Selects the clickcollect_info function
     elif delivery == 2:  # Triggers if input is 2
         print ("Delivery")
+        print()  # Prints out a blank space
         # Prints Delivery to let the user know they chose Delivery
         delivery_info()  # Selects the delivery_info function
         del_click = "delivery"  # Sets del_click as delivery
@@ -205,6 +214,7 @@ def clickcollect_info():  # Defines the code as a clickcollect_info function
     # Takes input from above and adds input to customer_details list as name.
     # Then it validates inputs as letters
     print (customer_details['name'])  # Prints out the customer's name
+    print()  # Prints out a blank space
 
     question = ("Please enter your phone number ")
     # Sets question to ask the user for their phone number
@@ -213,6 +223,7 @@ def clickcollect_info():  # Defines the code as a clickcollect_info function
     # Then it validates input as a valid NZ number.
     # Uses question, PH_LOW and PH_HIGH as parameters
     print (customer_details['phone'])  # Prints out customer's phone number
+    print()  # Prints out a blank space
 
 
 # Delivery information - name, phone number and address
@@ -228,6 +239,7 @@ def delivery_info():  # Defines the code as a delivery_info function
     # Takes input from above and adds input to customer_details list as name.
     # Then it validates inputs as letters
     print (customer_details['name'])  # Prints out the customer's name
+    print()  # Prints out a blank space
 
     question = ("Please enter your phone number ")
     # Sets question to ask the user for their phone number
@@ -235,6 +247,7 @@ def delivery_info():  # Defines the code as a delivery_info function
     # Takes input from above and adds input to customer_details list as phone.
     # Then it validates input as a valid NZ number
     print (customer_details['phone'])  # Prints out customer's phone number
+    print()  # Prints out a blank space
 
     question = ("Please enter your house number ")
     # Sets question to ask the user for their house number
@@ -242,6 +255,7 @@ def delivery_info():  # Defines the code as a delivery_info function
     # Takes input from above and adds input to customer_details list as house.
     # Then it validates input as not blank
     print (customer_details['house'])  # Prints out customer's house number
+    print()  # Prints out a blank space
 
     question = ("Please enter your street name ")
     # Sets question to ask the user for their street name
@@ -249,6 +263,7 @@ def delivery_info():  # Defines the code as a delivery_info function
     # Takes input from above and adds input to customer_details list as street.
     # Then it validates inputs as letters
     print (customer_details['street'])  # Prints out customer's street name
+    print()  # Prints out a blank space
 
     question = ("Please enter your suburb ")
     # Sets question to ask the user for their suburb
@@ -256,6 +271,7 @@ def delivery_info():  # Defines the code as a delivery_info function
     # Takes input from above and adds input to customer_details list as suburb.
     # Then it validates inputs as letters
     print (customer_details['suburb'])  # Prints out customer's suburb
+    print()  # Prints out a blank space
 
 
 # Keyboard menu
@@ -274,6 +290,7 @@ def menu():  # Defines the code as a menu function
     # Prints out each item in the keyboard_names list with
     # prices from keyboard_prices list.
     # Each item is formatted
+    print()  # Prints out a blank space
 
 
 # Keyboard ordering
@@ -287,23 +304,22 @@ def order_keyboard():  # Defines code as an order_keyboard function
     # Ask for total number of keyboards for order
     num_keyboards = 0
     # Sets num_keyboards (number of keyboards to be ordered) variable to 0
+    NUM_LOW = 1  # Sets constant as 1
+    NUM_HIGH = 10  # Sets constant as 10
     MENU_LOW = 1  # Sets constant as 1
     MENU_HIGH = 12  # Sets constant as 12
+    question = (f"Enter a number between {NUM_LOW} and {NUM_HIGH} ")
+    # Sets the question variable to ask users to choose
+    # between the LOW (1) and HIGH (10)
+    print("How many keyboards do you want to order? "
+          "You can only order a maxiumum of 10.")
+    print()  # Prints out a blank space
+    # Asks the user how many keyboards they want to order
+    num_keyboards = val_int(NUM_LOW, NUM_HIGH, question)
+    # Sets num_keyboards to use the val_int fucntion to
+    # make sure that the user can only enter integers.
+    # Uses NUM_LOW, NUM_HIGH and question as parameters
 
-    while True:  # Sets up while loop
-        try:  # While the function is true
-            num_keyboards = int(input("How many keyboards"
-                                      "do you want to order? "))
-            # Asks the user how many manga they would like to order
-            if num_keyboards >= 1:  # If num_manga is greater or equal to 1
-                break  # Break from loop and accept value
-            else:  # If input is inncorect
-                print("0 is not a valid number")
-                # Prints 0 in not a valid number
-        except ValueError:
-            print("That is not a valid number")
-            # Print this is not a valid number
-            print("Please enter a number")  # Print please enter a number
     # Choose keyboard from menu
     for item in range(num_keyboards):
         # For keyboard(s) between 1 and 12 (num_keyboard corresponding to the
@@ -313,6 +329,7 @@ def order_keyboard():  # Defines code as an order_keyboard function
             # (num_keyboards) is greater than 0
             print("Please choose the keyboard you would like to"
                   " order by entering the corresponding number on the menu.")
+            print()  # Prints out a blank space
             # Prints the question asking users to
             # choose which keyboard they want to order
             question = (f"Enter a number between {MENU_LOW} and {MENU_HIGH} ")
@@ -352,6 +369,7 @@ def print_order(del_click):  # Defines function as a print_order function
     if del_click == "Click and Collect":
         # Triggers if the del_click is set to Click and Collect
         print("Your order is for Click and Collect.")
+        print()  # Prints out a blank space
         # Prints message to indicate the order type
         print(f"Customer Name: {customer_details['name']} \nCustomer Phone Number: {customer_details['phone']}")
         # Prints out all of the customer's details (name and phone number)
@@ -361,10 +379,12 @@ def print_order(del_click):  # Defines function as a print_order function
         if len(order_list) >= 5:
             # If number of keyboards ordered is more than or equal to 5
             print ("Your order will be delievered for free")
+            print()  # Prints out a blank space
             # Prints message informing the customer their delivery fee is free
         elif len(order_list) < 5:
             # If number of keyboards ordered is less than 5
             print ("There is an additional $9.00 delivery charge")
+            print()  # Prints out a blank space
             total_cost = total_cost + 9
             # Adds the delivery cost of $9 to the total cost
         # Prints out all of the customer's details
@@ -416,11 +436,13 @@ def confirm_cancel():  # Defines the code as a confirm_cancel function
         print("Your order has been sent to our company")  # Prints message
         print("Your brand new keyboard will be with you shortly.")
         # Prints message
+        print()  # Prints out a blank space
         new_exit()  # Triggers the new_exit function below
 
     elif confirm == 2:  # Triggers if the input is 2
         print("Your Order has been Cancelled.")  # Prints message
         print("Your can restart your order or exit the BOT.")  # Prints message
+        print()  # Prints out a blank space
         new_exit()  # Triggers the new_exit function below
 
 
